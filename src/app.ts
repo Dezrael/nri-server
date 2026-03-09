@@ -7,11 +7,15 @@ import { apiRouter } from "./routes";
 
 export const app = express();
 
-const defaultAllowedOrigins = ["http://localhost:3000", "https://dezrael.github.io"];
+const defaultAllowedOrigins = [
+  "http://localhost:3000",
+  "https://dezrael.github.io/nri-skills",
+];
 
-const allowedOrigins = (process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(",")
-  : defaultAllowedOrigins
+const allowedOrigins = (
+  process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(",")
+    : defaultAllowedOrigins
 )
   .map((origin) => origin.trim())
   .filter(Boolean);
