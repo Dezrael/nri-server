@@ -1,16 +1,25 @@
 import { z } from "zod";
 import {
   classNameSchema,
-  descriptionSchema,
   entityNameSchema,
+  textBlockSchema,
 } from "./common.schemas";
 
 const skillBodyBase = z.object({
   className: classNameSchema,
   name: entityNameSchema,
-  description: descriptionSchema,
-  inCombatCooldownTurns: z.coerce.number().int().min(0).default(0),
-  outCombatCooldownMinutes: z.coerce.number().int().min(0).default(0),
+  actionType: z.string().trim().min(1).max(120),
+  range: z.string().trim().min(1).max(120),
+  stat: z.string().trim().min(1).max(120),
+  duration: z.string().trim().min(1).max(240),
+  damage: z.string().trim().min(1).max(120),
+  inCombatCooldown: z.string().trim().min(1).max(120),
+  outCombatCooldown: z.string().trim().min(1).max(120),
+  outCombatCharges: z.string().trim().min(1).max(120),
+  shortDescription: z.string().trim().min(1).max(300),
+  description: textBlockSchema,
+  concentration: z.coerce.boolean().default(false),
+  isChosen: z.coerce.boolean().default(false),
 });
 
 export const createSkillSchema = z.object({

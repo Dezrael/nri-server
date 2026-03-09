@@ -1,14 +1,14 @@
 import { z } from "zod";
 import {
   classNameSchema,
-  descriptionSchema,
   entityNameSchema,
+  textBlockSchema,
 } from "./common.schemas";
 
 const passiveBodyBase = z.object({
   className: classNameSchema,
   name: entityNameSchema,
-  description: descriptionSchema,
+  text: textBlockSchema,
 });
 
 export const createPassiveSchema = z.object({

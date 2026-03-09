@@ -2,10 +2,7 @@ import { Router } from "express";
 import { passiveController } from "../controllers/passive.controller";
 import { asyncHandler } from "../middlewares/asyncHandler";
 import { validate } from "../middlewares/validate";
-import {
-  classFilterQuerySchema,
-  idParamSchema,
-} from "../validators/common.schemas";
+import { idParamSchema } from "../validators/common.schemas";
 import {
   createPassiveSchema,
   updatePassiveSchema,

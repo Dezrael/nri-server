@@ -1,14 +1,17 @@
 import { z } from "zod";
 import {
   classNameSchema,
-  descriptionSchema,
   entityNameSchema,
+  textBlockSchema,
 } from "./common.schemas";
 
 const mushroomBodyBase = z.object({
   className: classNameSchema,
   name: entityNameSchema,
-  description: descriptionSchema,
+  baseEffect: textBlockSchema,
+  activationEffect: textBlockSchema,
+  summonEffect: textBlockSchema,
+  aspectEffect: textBlockSchema,
 });
 
 export const createMushroomSchema = z.object({

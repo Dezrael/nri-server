@@ -2,10 +2,7 @@ import { Router } from "express";
 import { skillController } from "../controllers/skill.controller";
 import { asyncHandler } from "../middlewares/asyncHandler";
 import { validate } from "../middlewares/validate";
-import {
-  classFilterQuerySchema,
-  idParamSchema,
-} from "../validators/common.schemas";
+import { idParamSchema } from "../validators/common.schemas";
 import {
   createSkillSchema,
   updateSkillSchema,

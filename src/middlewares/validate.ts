@@ -12,8 +12,16 @@ export const validate =
       }) as { body: unknown; query: unknown; params: unknown };
 
       req.body = parsed.body as Request["body"];
-      req.query = parsed.query as Request["query"];
-      req.params = parsed.params as Request["params"];
+
+      // In Express 5, req.query can be getter-only. Mutate in place instead.
+      if (parsed.query && typeof parsed.query === "object") {
+        Object.assign(req.query as Record<string, unknown>, parsed.query);
+      }
+
+      if (parsed.params && typeof parsed.params === "object") {
+        Object.assign(req.params as Record<string, unknown>, parsed.params);
+      }
+
       next();
     } catch (error) {
       next(error);
