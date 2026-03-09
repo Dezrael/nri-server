@@ -7,9 +7,30 @@ import { apiRouter } from "./routes";
 
 export const app = express();
 
+const defaultAllowedOrigins = ["http://localhost:3000", "https://dezrael.github.io"];
+
+const allowedOrigins = (process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+  : defaultAllowedOrigins
+)
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin(origin, callback) {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("CORS: origin not allowed"));
+    },
     credentials: true,
   }),
 );
