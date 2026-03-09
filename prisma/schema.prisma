@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Skill {
+  id                         Int      @id @default(autoincrement())
+  className                  String
+  name                       String
+  description                String?
+  inCombatCooldownTurns      Int      @default(0)
+  outCombatCooldownMinutes   Int      @default(0)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  @@unique([className, name])
+}
+
+model Passive {
+  id          Int      @id @default(autoincrement())
+  className   String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([className, name])
+}
+
+model Mushroom {
+  id          Int      @id @default(autoincrement())
+  className   String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([className, name])
+}
