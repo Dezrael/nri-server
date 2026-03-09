@@ -10,7 +10,7 @@ async function main() {
   await prisma.skill.createMany({
     data: [
       {
-        className: "Warrior",
+        className: "Воин",
         name: "Battle Cry",
         actionType: "main action",
         range: "self",
@@ -27,7 +27,7 @@ async function main() {
         isChosen: true,
       },
       {
-        className: "Mage",
+        className: "Маг",
         name: "Burning Beam",
         actionType: "main action",
         range: "60 feet",
@@ -44,7 +44,7 @@ async function main() {
         isChosen: true,
       },
       {
-        className: "Rogue",
+        className: "Разбойник",
         name: "Precise Shot",
         actionType: "main action",
         range: "120 feet",
@@ -60,7 +60,7 @@ async function main() {
         isChosen: true,
       },
       {
-        className: "Mushroomancer",
+        className: "Грибомант",
         name: "Mushroom Blast",
         actionType: "main action",
         range: "30 feet",
@@ -82,22 +82,22 @@ async function main() {
   await prisma.passive.createMany({
     data: [
       {
-        className: "Warrior",
+        className: "Воин",
         name: "Battle Spirit",
         text: "Gain +1 initiative and can inspire allies in combat.",
       },
       {
-        className: "Rogue",
+        className: "Разбойник",
         name: "Shadow Walk",
         text: "Move silently and gain advantage on stealth checks.",
       },
       {
-        className: "Mage",
+        className: "Маг",
         name: "Concentration Mastery",
         text: "Gain +2 on concentration saves when taking damage.",
       },
       {
-        className: "Mushroomancer",
+        className: "Грибомант",
         name: "Spore Immunity",
         text: "Resistance to plant poisons and toxic spores.",
       },
@@ -107,12 +107,29 @@ async function main() {
   await prisma.mushroom.createMany({
     data: [
       {
-        className: "Mushroomancer",
+        className: "Грибомант",
         name: "Fire Mushroom",
         baseEffect: "Creates a small fire orb in a 5-foot area",
         activationEffect: "Explodes for 3d6 fire damage in 10 feet",
         summonEffect: "Summons a fire elemental companion",
         aspectEffect: "Grants fire resistance and fire breath",
+      },
+      {
+        className: "Грибомант",
+        name: "Ice Mushroom",
+        baseEffect: "Creates a chilling aura in a 10-foot area",
+        activationEffect: "Freezes enemies and deals 2d8 cold damage",
+        summonEffect: "Summons an ice golem companion",
+        aspectEffect: "Grants cold resistance and a frost touch",
+      },
+      {
+        className: "Грибомант",
+        name: "Poison Mushroom",
+        baseEffect: "Spreads toxic spores in a 15-foot area",
+        activationEffect:
+          "Poisons enemies for 3 rounds and deals 2d6 poison damage",
+        summonEffect: "Summons a venom slime companion",
+        aspectEffect: "Grants poison immunity and venom strike",
       },
     ],
   });
