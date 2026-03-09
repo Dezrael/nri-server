@@ -115,3 +115,44 @@ curl -X POST "http://localhost:4000/api/v1/skills" \
 1. Set frontend API base URL to `http://localhost:4000/api/v1`.
 2. Keep cooldown state and cooldown tick logic in the client (local state or localStorage).
 3. Use backend for CRUD of skills, passives and mushrooms only.
+
+## Deploy to Vercel
+
+This project is configured for Vercel serverless runtime via `api/index.ts` and `vercel.json`.
+
+### 1. Create a Vercel project from GitHub
+
+- Import this repository in Vercel.
+- Keep Root Directory at the project root.
+- Framework preset: `Other`.
+
+### 2. Configure environment variables in Vercel
+
+Add in Vercel Project Settings:
+
+- `DATABASE_URL` - your production PostgreSQL URL (Neon/Vercel Postgres/Supabase)
+- `CORS_ORIGIN` - your frontend URL
+
+`PORT` is not required on Vercel.
+
+### 3. Run Prisma migration on production DB
+
+Run once against production database:
+
+```bash
+npx prisma migrate deploy
+```
+
+Alternative: use included GitHub Actions workflow `.github/workflows/prisma-migrate-deploy.yml`.
+It runs on push to `master`/`main` and can be started manually from Actions.
+
+Required GitHub repository secret:
+
+- `DATABASE_URL` - production PostgreSQL connection string
+
+Additionally, CI type checks are configured in `.github/workflows/ci-typecheck.yml` and run on pull requests and pushes to `master`/`main`.
+
+### 4. Verify deployment
+
+- `https://<your-vercel-domain>/health`
+- `https://<your-vercel-domain>/api/v1/skills`

@@ -11,7 +11,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "prisma db seed",
-    "seed": "npm run prisma:seed"
+    "seed": "npm run prisma:seed",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
