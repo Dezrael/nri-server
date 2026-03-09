@@ -8,14 +8,14 @@ export const idParamSchema = z.object({
   params: z.object({
     id: z.coerce.number().int().positive(),
   }),
-  body: z.object({}).passthrough(),
-  query: z.object({}).passthrough(),
+  body: z.object({}).passthrough().optional().default({}),
+  query: z.object({}).passthrough().optional().default({}),
 });
 
 export const classFilterQuerySchema = z.object({
   query: z.object({
     className: classNameSchema.optional(),
   }),
-  body: z.object({}).passthrough(),
-  params: z.object({}).passthrough(),
+  body: z.object({}).passthrough().optional().default({}),
+  params: z.object({}).passthrough().optional().default({}),
 });

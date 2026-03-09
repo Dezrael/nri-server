@@ -15,8 +15,8 @@ const skillBodyBase = z.object({
 
 export const createSkillSchema = z.object({
   body: skillBodyBase,
-  params: z.object({}).passthrough(),
-  query: z.object({}).passthrough(),
+  params: z.object({}).passthrough().optional().default({}),
+  query: z.object({}).passthrough().optional().default({}),
 });
 
 export const updateSkillSchema = z.object({
@@ -26,5 +26,5 @@ export const updateSkillSchema = z.object({
   body: skillBodyBase.partial().refine((data) => Object.keys(data).length > 0, {
     message: "At least one field is required",
   }),
-  query: z.object({}).passthrough(),
+  query: z.object({}).passthrough().optional().default({}),
 });

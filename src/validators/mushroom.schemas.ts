@@ -13,8 +13,8 @@ const mushroomBodyBase = z.object({
 
 export const createMushroomSchema = z.object({
   body: mushroomBodyBase,
-  params: z.object({}).passthrough(),
-  query: z.object({}).passthrough(),
+  params: z.object({}).passthrough().optional().default({}),
+  query: z.object({}).passthrough().optional().default({}),
 });
 
 export const updateMushroomSchema = z.object({
@@ -26,5 +26,5 @@ export const updateMushroomSchema = z.object({
     .refine((data) => Object.keys(data).length > 0, {
       message: "At least one field is required",
     }),
-  query: z.object({}).passthrough(),
+  query: z.object({}).passthrough().optional().default({}),
 });

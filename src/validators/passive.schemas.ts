@@ -13,8 +13,8 @@ const passiveBodyBase = z.object({
 
 export const createPassiveSchema = z.object({
   body: passiveBodyBase,
-  params: z.object({}).passthrough(),
-  query: z.object({}).passthrough(),
+  params: z.object({}).passthrough().optional().default({}),
+  query: z.object({}).passthrough().optional().default({}),
 });
 
 export const updatePassiveSchema = z.object({
@@ -26,5 +26,5 @@ export const updatePassiveSchema = z.object({
     .refine((data) => Object.keys(data).length > 0, {
       message: "At least one field is required",
     }),
-  query: z.object({}).passthrough(),
+  query: z.object({}).passthrough().optional().default({}),
 });
