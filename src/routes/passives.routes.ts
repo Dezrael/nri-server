@@ -13,11 +13,7 @@ import {
 
 export const passivesRouter = Router();
 
-passivesRouter.get(
-  "/",
-  validate(classFilterQuerySchema),
-  asyncHandler(passiveController.list),
-);
+passivesRouter.get("/", asyncHandler(passiveController.list));
 passivesRouter.post(
   "/",
   validate(createPassiveSchema),

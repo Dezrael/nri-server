@@ -13,11 +13,7 @@ import {
 
 export const skillsRouter = Router();
 
-skillsRouter.get(
-  "/",
-  validate(classFilterQuerySchema),
-  asyncHandler(skillController.list),
-);
+skillsRouter.get("/", asyncHandler(skillController.list));
 skillsRouter.post(
   "/",
   validate(createSkillSchema),

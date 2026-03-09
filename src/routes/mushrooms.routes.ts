@@ -13,11 +13,7 @@ import {
 
 export const mushroomsRouter = Router();
 
-mushroomsRouter.get(
-  "/",
-  validate(classFilterQuerySchema),
-  asyncHandler(mushroomController.list),
-);
+mushroomsRouter.get("/", asyncHandler(mushroomController.list));
 mushroomsRouter.post(
   "/",
   validate(createMushroomSchema),

@@ -8,6 +8,9 @@ export const errorHandler = (
   res: Response,
   _next: NextFunction,
 ): void => {
+  // Log all errors for debugging
+  console.error("Error caught by errorHandler:", err);
+
   if (err instanceof ZodError) {
     res.status(400).json({
       error: "Validation error",
