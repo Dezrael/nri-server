@@ -7,6 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Class {
+  id        Int      @id @default(autoincrement())
+  className String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  skills    Skill[]
+  passives  Passive[]
+  mushrooms Mushroom[]
+}
+
 model Skill {
   id                Int      @id @default(autoincrement())
   className         String
@@ -27,6 +38,9 @@ model Skill {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
+  classId Int?
+  class   Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
+
   @@unique([className, name])
 }
 
@@ -37,6 +51,9 @@ model Passive {
   text      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  classId Int?
+  class   Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   @@unique([className, name])
 }
@@ -51,6 +68,9 @@ model Mushroom {
   aspectEffect     String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+
+  classId Int?
+  class   Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   @@unique([className, name])
 }
