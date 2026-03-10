@@ -1,8 +1,12 @@
 import { Router } from "express";
 import { authController } from "../controllers/auth.controller";
 import { asyncHandler } from "../middlewares/asyncHandler";
+import { requireAdmin } from "../middlewares/requireAdmin";
 import { validate } from "../middlewares/validate";
-import { adminLoginSchema } from "../validators/auth.schemas";
+import {
+  adminBulkImportSchema,
+  adminLoginSchema,
+} from "../validators/auth.schemas";
 
 export const authRouter = Router();
 
@@ -10,4 +14,11 @@ authRouter.post(
   "/login",
   validate(adminLoginSchema),
   asyncHandler(authController.login),
+);
+
+authRouter.post(
+  "/bulk-import",
+  requireAdmin,
+  validate(adminBulkImportSchema),
+  asyncHandler(authController.bulkImport),
 );

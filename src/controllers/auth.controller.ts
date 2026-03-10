@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { prisma } from "../db/prisma";
 import { AppError } from "../types/api";
 import { createAdminToken, verifyAdminPassword } from "../utils/adminToken";
 
@@ -12,5 +13,168 @@ export const authController = {
 
     const data = { token: createAdminToken() };
     res.json({ data });
+  },
+
+  async bulkImport(req: Request, res: Response) {
+    const payload = req.body as {
+      exportedAt: string;
+      source: string;
+      data: Record<
+        string,
+        {
+          skills: Array<{
+            className: string;
+            name: string;
+            actionType: string;
+            range: string;
+            stat: string;
+            duration: string;
+            damage: string;
+            inCombatCooldown: string;
+            outCombatCooldown: string;
+            outCombatCharges: string;
+            shortDescription: string;
+            description: string;
+            concentration: boolean;
+            isChosen: boolean;
+          }>;
+          passives: Array<{
+            className: string;
+            name: string;
+            text: string;
+          }>;
+          mushrooms: Array<{
+            className: string;
+            name: string;
+            baseEffect: string;
+            activationEffect: string;
+            summonEffect: string;
+            aspectEffect: string;
+          }>;
+        }
+      >;
+    };
+
+    const skillRows: Array<{
+      className: string;
+      name: string;
+      actionType: string;
+      range: string;
+      stat: string;
+      duration: string;
+      damage: string;
+      inCombatCooldown: string;
+      outCombatCooldown: string;
+      outCombatCharges: string;
+      shortDescription: string;
+      description: string;
+      concentration: boolean;
+      isChosen: boolean;
+    }> = [];
+
+    const passiveRows: Array<{
+      className: string;
+      name: string;
+      text: string;
+    }> = [];
+
+    const mushroomRows: Array<{
+      className: string;
+      name: string;
+      baseEffect: string;
+      activationEffect: string;
+      summonEffect: string;
+      aspectEffect: string;
+    }> = [];
+
+    for (const [className, classData] of Object.entries(payload.data)) {
+      for (const skill of classData.skills) {
+        if (skill.className !== className) {
+          throw new AppError(
+            `Skill className mismatch for \"${skill.name}\"`,
+            400,
+          );
+        }
+
+        skillRows.push({
+          className,
+          name: skill.name,
+          actionType: skill.actionType,
+          range: skill.range,
+          stat: skill.stat,
+          duration: skill.duration,
+          damage: skill.damage,
+          inCombatCooldown: skill.inCombatCooldown,
+          outCombatCooldown: skill.outCombatCooldown,
+          outCombatCharges: skill.outCombatCharges,
+          shortDescription: skill.shortDescription,
+          description: skill.description,
+          concentration: skill.concentration,
+          isChosen: skill.isChosen,
+        });
+      }
+
+      for (const passive of classData.passives) {
+        if (passive.className !== className) {
+          throw new AppError(
+            `Passive className mismatch for \"${passive.name}\"`,
+            400,
+          );
+        }
+
+        passiveRows.push({
+          className,
+          name: passive.name,
+          text: passive.text,
+        });
+      }
+
+      for (const mushroom of classData.mushrooms) {
+        if (mushroom.className !== className) {
+          throw new AppError(
+            `Mushroom className mismatch for \"${mushroom.name}\"`,
+            400,
+          );
+        }
+
+        mushroomRows.push({
+          className,
+          name: mushroom.name,
+          baseEffect: mushroom.baseEffect,
+          activationEffect: mushroom.activationEffect,
+          summonEffect: mushroom.summonEffect,
+          aspectEffect: mushroom.aspectEffect,
+        });
+      }
+    }
+
+    await prisma.$transaction(async (tx) => {
+      await tx.mushroom.deleteMany();
+      await tx.passive.deleteMany();
+      await tx.skill.deleteMany();
+
+      if (skillRows.length > 0) {
+        await tx.skill.createMany({ data: skillRows });
+      }
+
+      if (passiveRows.length > 0) {
+        await tx.passive.createMany({ data: passiveRows });
+      }
+
+      if (mushroomRows.length > 0) {
+        await tx.mushroom.createMany({ data: mushroomRows });
+      }
+    });
+
+    res.json({
+      data: {
+        importedAt: new Date().toISOString(),
+        source: payload.source,
+        classes: Object.keys(payload.data).length,
+        skills: skillRows.length,
+        passives: passiveRows.length,
+        mushrooms: mushroomRows.length,
+      },
+    });
   },
 };
