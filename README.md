@@ -42,8 +42,11 @@ Create `.env` from `.env.example`:
 
 ```env
 PORT=4000
-CORS_ORIGIN="http://localhost:5173"
+CORS_ORIGIN="https://localhost:3000"
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/nri_server?schema=public"
+ADMIN_PASSWORD="change_me"
+ADMIN_TOKEN_SECRET="change_me_to_a_long_random_secret"
+ADMIN_TOKEN_TTL_SECONDS=28800
 ```
 
 ## Install and Run
@@ -67,47 +70,98 @@ npm start
 
 - `GET /health`
 
+All API routes are under `/api/v1`.
+
+Public read endpoints:
+
+- `GET /api/v1/classes`
+- `GET /api/v1/classes/:className/skills`
+- `GET /api/v1/classes/:className/passives`
+- `GET /api/v1/classes/:className/mushrooms`
+- `GET /api/v1/skills?className=...`
+- `GET /api/v1/passives?className=...`
+- `GET /api/v1/mushrooms?className=...`
+
+Write endpoints (create/update/delete):
+
+- `POST /api/v1/skills`
+- `POST /api/v1/passives`
+- `POST /api/v1/mushrooms`
+- `PUT /api/v1/skills/:id` (admin)
+- `PUT /api/v1/passives/:id` (admin)
+- `PUT /api/v1/mushrooms/:id` (admin)
+- `DELETE /api/v1/skills/:id` (admin)
+- `DELETE /api/v1/passives/:id` (admin)
+- `DELETE /api/v1/mushrooms/:id` (admin)
+- `POST /api/v1/classes` (admin)
+- `DELETE /api/v1/classes/:className` (admin)
+
+Admin auth endpoints:
+
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/bulk-import` (admin)
+
 ### Skills
 
-- `GET /api/v1/skills?className=...`
-- `POST /api/v1/skills`
-- `PUT /api/v1/skills/:id`
-- `DELETE /api/v1/skills/:id`
+- Required on create: `className`, `name`, `shortDescription`, `description`
+- Optional on create with defaults:
+  - `actionType` -> `"-"`
+  - `range` -> `"-"`
+  - `stat` -> `"-"`
+  - `duration` -> `"-"`
+  - `damage` -> `"-"`
+  - `inCombatCooldown` -> `"0"`
+  - `outCombatCooldown` -> `"-"`
+  - `outCombatCharges` -> `"infinite"`
+  - `category` -> `"Основные"`
+  - `concentration` -> `false`
+  - `isChosen` -> `false`
 
 ### Passives
 
-- `GET /api/v1/passives?className=...`
-- `POST /api/v1/passives`
-- `PUT /api/v1/passives/:id`
-- `DELETE /api/v1/passives/:id`
+- Required on create: `className`, `name`, `text`
 
 ### Mushrooms
 
-- `GET /api/v1/mushrooms?className=...`
-- `POST /api/v1/mushrooms`
-- `PUT /api/v1/mushrooms/:id`
-- `DELETE /api/v1/mushrooms/:id`
+- Required on create: `className`, `name`, `baseEffect`
+- Optional on create with defaults: `activationEffect`, `summonEffect`, `aspectEffect` -> `""`
 
 ## cURL Examples
 
 Get skills for class:
 
 ```bash
-curl "http://localhost:4000/api/v1/skills?className=Mage"
+curl "http://localhost:4000/api/v1/skills?className=Маг"
 ```
 
-Create skill:
+Create skill (minimal payload):
 
 ```bash
 curl -X POST "http://localhost:4000/api/v1/skills" \
   -H "Content-Type: application/json" \
   -d '{
-    "className": "Mage",
-    "name": "Lightning Bolt",
-    "description": "Single target shock damage",
-    "inCombatCooldownTurns": 2,
-    "outCombatCooldownMinutes": 6
+    "className": "Маг",
+    "name": "Разряд",
+    "shortDescription": "Короткое описание",
+    "description": "Полное описание"
   }'
+```
+
+Admin login:
+
+```bash
+curl -X POST "http://localhost:4000/api/v1/auth/login" \
+  -H "Content-Type: application/json" \
+  -d '{"password":"your_admin_password"}'
+```
+
+Admin update skill (with token):
+
+```bash
+curl -X PUT "http://localhost:4000/api/v1/skills/1" \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"isChosen":true,"category":"Урон"}'
 ```
 
 ## Frontend Integration
@@ -131,7 +185,10 @@ This project is configured for Vercel serverless runtime via `api/index.ts` and 
 Add in Vercel Project Settings:
 
 - `DATABASE_URL` - your production PostgreSQL URL (Neon/Vercel Postgres/Supabase)
-- `CORS_ORIGIN` - your frontend URL
+- `CORS_ORIGIN` - allowed frontend origins (comma-separated if multiple)
+- `ADMIN_PASSWORD` - admin password for `/api/v1/auth/login`
+- `ADMIN_TOKEN_SECRET` - long random signing key for admin token
+- `ADMIN_TOKEN_TTL_SECONDS` - optional token lifetime (default: `28800`)
 
 `PORT` is not required on Vercel.
 
@@ -144,11 +201,7 @@ npx prisma migrate deploy
 ```
 
 Alternative: use included GitHub Actions workflow `.github/workflows/prisma-migrate-deploy.yml`.
-It runs on push to `master`/`main` and can be started manually from Actions.
-
-Required GitHub repository secret:
-
-- `DATABASE_URL` - production PostgreSQL connection string
+It runs on push to `master`/`main` and can be started manually from Actions. If GitHub secret `DATABASE_URL` is not configured, migration job is skipped.
 
 Additionally, CI type checks are configured in `.github/workflows/ci-typecheck.yml` and run on pull requests and pushes to `master`/`main`.
 
