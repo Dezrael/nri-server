@@ -108,7 +108,8 @@ Admin auth endpoints:
   - `actionType` -> `"-"`
   - `range` -> `"-"`
   - `stat` -> `"-"`
-  - `duration` -> `"-"`
+  - `durationInCombat` -> `"-"`
+  - `durationOutOfCombat` -> `"-"`
   - `damage` -> `"-"`
   - `inCombatCooldown` -> `"-"`
   - `outCombatCooldown` -> `"-"`

@@ -25,7 +25,8 @@ model Skill {
   actionType        String
   range             String
   stat              String
-  duration          String
+  durationInCombat  String
+  durationOutOfCombat String
   damage            String
   inCombatCooldown  String
   outCombatCooldown String

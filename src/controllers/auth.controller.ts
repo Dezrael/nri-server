@@ -28,7 +28,8 @@ export const authController = {
             actionType: string;
             range: string;
             stat: string;
-            duration: string;
+            durationInCombat: string;
+            durationOutOfCombat: string;
             damage: string;
             inCombatCooldown: string;
             outCombatCooldown: string;
@@ -62,7 +63,8 @@ export const authController = {
       actionType: string;
       range: string;
       stat: string;
-      duration: string;
+      durationInCombat: string;
+      durationOutOfCombat: string;
       damage: string;
       inCombatCooldown: string;
       outCombatCooldown: string;
@@ -104,7 +106,8 @@ export const authController = {
           actionType: skill.actionType,
           range: skill.range,
           stat: skill.stat,
-          duration: skill.duration,
+          durationInCombat: skill.durationInCombat,
+          durationOutOfCombat: skill.durationOutOfCombat,
           damage: skill.damage,
           inCombatCooldown: skill.inCombatCooldown,
           outCombatCooldown: skill.outCombatCooldown,

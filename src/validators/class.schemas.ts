@@ -12,7 +12,12 @@ const classSkillInputSchema = z.object({
   actionType: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
   range: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
   stat: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
-  duration: emptyToUndefined(z.string().trim().min(1).max(240)).default("-"),
+  durationInCombat: emptyToUndefined(z.string().trim().min(1).max(240)).default(
+    "-",
+  ),
+  durationOutOfCombat: emptyToUndefined(
+    z.string().trim().min(1).max(240),
+  ).default("-"),
   damage: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
   inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "-",
