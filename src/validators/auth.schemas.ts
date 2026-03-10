@@ -20,6 +20,7 @@ const importedSkillSchema = z.object({
   inCombatCooldown: z.string(),
   outCombatCooldown: z.string(),
   outCombatCharges: z.string(),
+  category: z.string().optional().default("Основные"),
   shortDescription: z.string(),
   description: z.string(),
   concentration: z.boolean(),
