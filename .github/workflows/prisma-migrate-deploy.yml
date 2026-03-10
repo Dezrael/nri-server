@@ -9,6 +9,7 @@ on:
 
 jobs:
   migrate:
+    if: ${{ secrets.DATABASE_URL != '' }}
     runs-on: ubuntu-latest
     environment: production
     steps:
