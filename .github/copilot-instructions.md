@@ -26,6 +26,7 @@ interface Skill {
   inCombatCooldown: string;
   outCombatCooldown: string;
   outCombatCharges: string;
+  cooldownType?: string;
   category: string;
   shortDescription: string;
   description: string;
@@ -264,6 +265,7 @@ Partial<
     | "inCombatCooldown"
     | "outCombatCooldown"
     | "outCombatCharges"
+    | "cooldownType"
     | "category"
     | "shortDescription"
     | "description"

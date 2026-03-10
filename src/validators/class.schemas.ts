@@ -28,6 +28,7 @@ const classSkillInputSchema = z.object({
   outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "-",
   ),
+  cooldownType: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
   category: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "Основные",
   ),

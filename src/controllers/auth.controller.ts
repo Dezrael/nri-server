@@ -34,6 +34,7 @@ export const authController = {
             inCombatCooldown: string;
             outCombatCooldown: string;
             outCombatCharges: string;
+            cooldownType?: string;
             category?: string;
             shortDescription: string;
             description: string;
@@ -69,6 +70,7 @@ export const authController = {
       inCombatCooldown: string;
       outCombatCooldown: string;
       outCombatCharges: string;
+      cooldownType?: string;
       category: string;
       shortDescription: string;
       description: string;
@@ -112,6 +114,7 @@ export const authController = {
           inCombatCooldown: skill.inCombatCooldown,
           outCombatCooldown: skill.outCombatCooldown,
           outCombatCharges: skill.outCombatCharges,
+          cooldownType: skill.cooldownType,
           category: skill.category ?? "Основные",
           shortDescription: skill.shortDescription,
           description: skill.description,

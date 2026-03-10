@@ -28,6 +28,7 @@ const createSkillBodySchema = z.object({
   outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "-",
   ),
+  cooldownType: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
   category: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "Основные",
   ),
@@ -49,6 +50,7 @@ const updateSkillBodySchema = z.object({
   inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)),
   outCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)),
   outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)),
+  cooldownType: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
   category: emptyToUndefined(z.string().trim().min(1).max(120)),
   shortDescription: z.string().trim().min(1).max(300).optional(),
   description: textBlockSchema.optional(),

@@ -117,6 +117,8 @@ Admin auth endpoints:
   - `category` -> `"Основные"`
   - `concentration` -> `false`
   - `isChosen` -> `false`
+- Optional on create without default:
+  - `cooldownType` -> not set (`null` in DB)
 
 ### Passives
 

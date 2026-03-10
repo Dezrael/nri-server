@@ -23,6 +23,7 @@ export const classService = {
       inCombatCooldown: string;
       outCombatCooldown: string;
       outCombatCharges: string;
+      cooldownType?: string;
       shortDescription: string;
       description: string;
       concentration: boolean;

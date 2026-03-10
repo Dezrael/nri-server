@@ -31,6 +31,7 @@ model Skill {
   inCombatCooldown  String
   outCombatCooldown String
   outCombatCharges  String
+  cooldownType      String?
   category          String   @default("Основные")
   shortDescription  String
   description       String
