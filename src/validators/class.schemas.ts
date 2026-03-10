@@ -14,10 +14,18 @@ const classSkillInputSchema = z.object({
   stat: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
   duration: emptyToUndefined(z.string().trim().min(1).max(240)).default("-"),
   damage: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
-  inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
-  outCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
-  outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
-  category: emptyToUndefined(z.string().trim().min(1).max(120)).default("Основные"),
+  inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default(
+    "-",
+  ),
+  outCombatCooldown: emptyToUndefined(
+    z.string().trim().min(1).max(120),
+  ).default("-"),
+  outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default(
+    "-",
+  ),
+  category: emptyToUndefined(z.string().trim().min(1).max(120)).default(
+    "Основные",
+  ),
   shortDescription: z.string().trim().min(1).max(300),
   description: textBlockSchema,
   concentration: z.coerce.boolean().default(false),
