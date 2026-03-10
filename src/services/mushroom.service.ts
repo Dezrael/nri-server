@@ -17,7 +17,7 @@ export const mushroomService = {
   async update(id: number, data: Prisma.MushroomUpdateInput) {
     const existing = await prisma.mushroom.findUnique({ where: { id } });
     if (!existing) {
-      throw new AppError("Mushroom not found", 404);
+      throw new AppError("Гриб не найден", 404);
     }
 
     return prisma.mushroom.update({
@@ -29,7 +29,7 @@ export const mushroomService = {
   async remove(id: number) {
     const existing = await prisma.mushroom.findUnique({ where: { id } });
     if (!existing) {
-      throw new AppError("Mushroom not found", 404);
+      throw new AppError("Гриб не найден", 404);
     }
 
     await prisma.mushroom.delete({ where: { id } });

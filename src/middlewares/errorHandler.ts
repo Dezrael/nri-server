@@ -97,8 +97,8 @@ export const errorHandler = (
     });
 
     res.status(400).json({
-      error: "Validation error",
-      message: issues[0]?.message || "Invalid request data",
+      error: "Ошибка валидации",
+      message: issues[0]?.message || "Некорректные данные запроса",
       details: {
         fields: issues,
         formErrors: err.flatten().formErrors,
@@ -116,6 +116,6 @@ export const errorHandler = (
   }
 
   res.status(500).json({
-    error: "Internal server error",
+    error: "Внутренняя ошибка сервера",
   });
 };

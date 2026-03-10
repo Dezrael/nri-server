@@ -8,7 +8,7 @@ export const authController = {
     const { password } = req.body as { password: string };
 
     if (!verifyAdminPassword(password)) {
-      throw new AppError("Invalid credentials", 401);
+      throw new AppError("Неверный пароль", 401);
     }
 
     const data = { token: createAdminToken() };
@@ -91,7 +91,7 @@ export const authController = {
       for (const skill of classData.skills) {
         if (skill.className !== className) {
           throw new AppError(
-            `Skill className mismatch for \"${skill.name}\"`,
+            `Несовпадение класса у навыка "${skill.name}"`,
             400,
           );
         }
@@ -117,7 +117,7 @@ export const authController = {
       for (const passive of classData.passives) {
         if (passive.className !== className) {
           throw new AppError(
-            `Passive className mismatch for \"${passive.name}\"`,
+            `Несовпадение класса у пассивки "${passive.name}"`,
             400,
           );
         }
@@ -132,7 +132,7 @@ export const authController = {
       for (const mushroom of classData.mushrooms) {
         if (mushroom.className !== className) {
           throw new AppError(
-            `Mushroom className mismatch for \"${mushroom.name}\"`,
+            `Несовпадение класса у гриба "${mushroom.name}"`,
             400,
           );
         }

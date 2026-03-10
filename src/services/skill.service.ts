@@ -17,7 +17,7 @@ export const skillService = {
   async update(id: number, data: Prisma.SkillUpdateInput) {
     const existing = await prisma.skill.findUnique({ where: { id } });
     if (!existing) {
-      throw new AppError("Skill not found", 404);
+      throw new AppError("Навык не найден", 404);
     }
 
     return prisma.skill.update({
@@ -29,7 +29,7 @@ export const skillService = {
   async remove(id: number) {
     const existing = await prisma.skill.findUnique({ where: { id } });
     if (!existing) {
-      throw new AppError("Skill not found", 404);
+      throw new AppError("Навык не найден", 404);
     }
 
     await prisma.skill.delete({ where: { id } });

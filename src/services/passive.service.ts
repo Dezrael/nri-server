@@ -17,7 +17,7 @@ export const passiveService = {
   async update(id: number, data: Prisma.PassiveUpdateInput) {
     const existing = await prisma.passive.findUnique({ where: { id } });
     if (!existing) {
-      throw new AppError("Passive not found", 404);
+      throw new AppError("Пассивка не найдена", 404);
     }
 
     return prisma.passive.update({
@@ -29,7 +29,7 @@ export const passiveService = {
   async remove(id: number) {
     const existing = await prisma.passive.findUnique({ where: { id } });
     if (!existing) {
-      throw new AppError("Passive not found", 404);
+      throw new AppError("Пассивка не найдена", 404);
     }
 
     await prisma.passive.delete({ where: { id } });

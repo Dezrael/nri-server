@@ -57,7 +57,7 @@ export const classService = {
   }) {
     const classNames = await this.list();
     if (classNames.includes(data.className)) {
-      throw new AppError("Class already exists", 409);
+      throw new AppError("Класс уже существует", 409);
     }
 
     await prisma.$transaction(async (tx) => {
@@ -100,7 +100,7 @@ export const classService = {
   async remove(className: string) {
     const classNames = await this.list();
     if (!classNames.includes(className)) {
-      throw new AppError("Class not found", 404);
+      throw new AppError("Класс не найден", 404);
     }
 
     const result = await prisma.$transaction(async (tx) => {

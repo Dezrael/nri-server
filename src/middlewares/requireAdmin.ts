@@ -9,18 +9,18 @@ export const requireAdmin = (
 ): void => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    next(new AppError("Unauthorized", 401));
+    next(new AppError("Нет доступа", 401));
     return;
   }
 
   const [scheme, token] = authHeader.split(" ");
   if (scheme !== "Bearer" || !token) {
-    next(new AppError("Unauthorized", 401));
+    next(new AppError("Нет доступа", 401));
     return;
   }
 
   if (!verifyAdminToken(token)) {
-    next(new AppError("Unauthorized", 401));
+    next(new AppError("Нет доступа", 401));
     return;
   }
 

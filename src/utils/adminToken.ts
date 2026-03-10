@@ -9,7 +9,7 @@ type AdminTokenPayload = {
 function getAdminPassword(): string {
   const value = process.env.ADMIN_PASSWORD;
   if (!value) {
-    throw new AppError("ADMIN_PASSWORD is not configured", 500);
+    throw new AppError("Пароль администратора не настроен", 500);
   }
   return value;
 }
