@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { passiveController } from "../controllers/passive.controller";
 import { asyncHandler } from "../middlewares/asyncHandler";
+import { requireAdmin } from "../middlewares/requireAdmin";
 import { validate } from "../middlewares/validate";
 import { idParamSchema } from "../validators/common.schemas";
 import {
@@ -18,11 +19,13 @@ passivesRouter.post(
 );
 passivesRouter.put(
   "/:id",
+  requireAdmin,
   validate(updatePassiveSchema),
   asyncHandler(passiveController.update),
 );
 passivesRouter.delete(
   "/:id",
+  requireAdmin,
   validate(idParamSchema),
   asyncHandler(passiveController.remove),
 );

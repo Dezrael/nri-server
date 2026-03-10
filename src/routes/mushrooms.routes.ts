@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { mushroomController } from "../controllers/mushroom.controller";
 import { asyncHandler } from "../middlewares/asyncHandler";
+import { requireAdmin } from "../middlewares/requireAdmin";
 import { validate } from "../middlewares/validate";
 import { idParamSchema } from "../validators/common.schemas";
 import {
@@ -18,11 +19,13 @@ mushroomsRouter.post(
 );
 mushroomsRouter.put(
   "/:id",
+  requireAdmin,
   validate(updateMushroomSchema),
   asyncHandler(mushroomController.update),
 );
 mushroomsRouter.delete(
   "/:id",
+  requireAdmin,
   validate(idParamSchema),
   asyncHandler(mushroomController.remove),
 );
