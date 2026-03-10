@@ -25,6 +25,7 @@ interface Skill {
   inCombatCooldown: string;
   outCombatCooldown: string;
   outCombatCharges: string;
+  category: string;
   shortDescription: string;
   description: string;
   concentration: boolean;
@@ -261,6 +262,7 @@ Partial<
     | "inCombatCooldown"
     | "outCombatCooldown"
     | "outCombatCharges"
+    | "category"
     | "shortDescription"
     | "description"
     | "concentration"

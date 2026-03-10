@@ -22,6 +22,7 @@ const createSkillBodySchema = z.object({
     .max(120)
     .optional()
     .default("infinite"),
+  category: z.string().trim().min(1).max(120).optional().default("Основные"),
   shortDescription: z.string().trim().min(1).max(300),
   description: textBlockSchema,
   concentration: z.coerce.boolean().default(false),
@@ -39,6 +40,7 @@ const updateSkillBodySchema = z.object({
   inCombatCooldown: z.string().trim().min(1).max(120).optional(),
   outCombatCooldown: z.string().trim().min(1).max(120).optional(),
   outCombatCharges: z.string().trim().min(1).max(120).optional(),
+  category: z.string().trim().min(1).max(120).optional(),
   shortDescription: z.string().trim().min(1).max(300).optional(),
   description: textBlockSchema.optional(),
   concentration: z.coerce.boolean().optional(),

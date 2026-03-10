@@ -19,6 +19,7 @@ model Skill {
   inCombatCooldown  String
   outCombatCooldown String
   outCombatCharges  String
+  category          String   @default("Основные")
   shortDescription  String
   description       String
   concentration     Boolean  @default(false)
