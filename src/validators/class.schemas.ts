@@ -8,14 +8,20 @@ import {
 const classSkillInputSchema = z.object({
   className: classNameSchema.optional(),
   name: entityNameSchema,
-  actionType: z.string().trim().min(1).max(120),
-  range: z.string().trim().min(1).max(120),
-  stat: z.string().trim().min(1).max(120),
-  duration: z.string().trim().min(1).max(240),
-  damage: z.string().trim().min(1).max(120),
-  inCombatCooldown: z.string().trim().min(1).max(120),
-  outCombatCooldown: z.string().trim().min(1).max(120),
-  outCombatCharges: z.string().trim().min(1).max(120),
+  actionType: z.string().trim().min(1).max(120).optional().default("-"),
+  range: z.string().trim().min(1).max(120).optional().default("-"),
+  stat: z.string().trim().min(1).max(120).optional().default("-"),
+  duration: z.string().trim().min(1).max(240).optional().default("-"),
+  damage: z.string().trim().min(1).max(120).optional().default("-"),
+  inCombatCooldown: z.string().trim().min(1).max(120).optional().default("0"),
+  outCombatCooldown: z.string().trim().min(1).max(120).optional().default("-"),
+  outCombatCharges: z
+    .string()
+    .trim()
+    .min(1)
+    .max(120)
+    .optional()
+    .default("infinite"),
   shortDescription: z.string().trim().min(1).max(300),
   description: textBlockSchema,
   concentration: z.coerce.boolean().default(false),
@@ -32,9 +38,9 @@ const classMushroomInputSchema = z.object({
   className: classNameSchema.optional(),
   name: entityNameSchema,
   baseEffect: textBlockSchema,
-  activationEffect: textBlockSchema,
-  summonEffect: textBlockSchema,
-  aspectEffect: textBlockSchema,
+  activationEffect: z.string().trim().max(4000).optional().default(""),
+  summonEffect: z.string().trim().max(4000).optional().default(""),
+  aspectEffect: z.string().trim().max(4000).optional().default(""),
 });
 
 export const createClassSchema = z.object({
