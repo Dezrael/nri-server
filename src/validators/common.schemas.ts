@@ -5,7 +5,7 @@ import { z } from "zod";
 export const emptyToUndefined = (schema: z.ZodString) =>
   z.preprocess(
     (v) => (typeof v === "string" && v.trim() === "" ? undefined : v),
-    schema,
+    schema.optional(),
   );
 
 export const classNameSchema = z.string().trim().min(1).max(80);

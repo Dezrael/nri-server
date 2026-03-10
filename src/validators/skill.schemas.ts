@@ -9,33 +9,23 @@ import {
 const createSkillBodySchema = z.object({
   className: classNameSchema,
   name: entityNameSchema,
-  actionType: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("-"),
-  range: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("-"),
-  stat: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("-"),
-  duration: emptyToUndefined(z.string().trim().min(1).max(240))
-    .optional()
-    .default("-"),
-  damage: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("-"),
-  inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("0"),
-  outCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("-"),
-  outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("infinite"),
-  category: emptyToUndefined(z.string().trim().min(1).max(120))
-    .optional()
-    .default("Основные"),
+  actionType: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  range: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  stat: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  duration: emptyToUndefined(z.string().trim().min(1).max(240)).default("-"),
+  damage: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default(
+    "0",
+  ),
+  outCombatCooldown: emptyToUndefined(
+    z.string().trim().min(1).max(120),
+  ).default("-"),
+  outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default(
+    "infinite",
+  ),
+  category: emptyToUndefined(z.string().trim().min(1).max(120)).default(
+    "Основные",
+  ),
   shortDescription: z.string().trim().min(1).max(300),
   description: textBlockSchema,
   concentration: z.coerce.boolean().default(false),
@@ -45,21 +35,15 @@ const createSkillBodySchema = z.object({
 const updateSkillBodySchema = z.object({
   className: classNameSchema.optional(),
   name: entityNameSchema.optional(),
-  actionType: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
-  range: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
-  stat: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
-  duration: emptyToUndefined(z.string().trim().min(1).max(240)).optional(),
-  damage: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
-  inCombatCooldown: emptyToUndefined(
-    z.string().trim().min(1).max(120),
-  ).optional(),
-  outCombatCooldown: emptyToUndefined(
-    z.string().trim().min(1).max(120),
-  ).optional(),
-  outCombatCharges: emptyToUndefined(
-    z.string().trim().min(1).max(120),
-  ).optional(),
-  category: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
+  actionType: emptyToUndefined(z.string().trim().min(1).max(120)),
+  range: emptyToUndefined(z.string().trim().min(1).max(120)),
+  stat: emptyToUndefined(z.string().trim().min(1).max(120)),
+  duration: emptyToUndefined(z.string().trim().min(1).max(240)),
+  damage: emptyToUndefined(z.string().trim().min(1).max(120)),
+  inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)),
+  outCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)),
+  outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)),
+  category: emptyToUndefined(z.string().trim().min(1).max(120)),
   shortDescription: z.string().trim().min(1).max(300).optional(),
   description: textBlockSchema.optional(),
   concentration: z.coerce.boolean().optional(),
