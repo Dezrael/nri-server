@@ -103,15 +103,15 @@ export const classService = {
     }
 
     const result = await prisma.$transaction(async (tx) => {
-      // Delete entities first (due to cascade, this is handled, but explicit for clarity)
+      // Delete by className to cover both inline (classId set) and separately-created entities (classId null)
       const deletedMushrooms = await tx.mushroom.deleteMany({
-        where: { classId: classRecord.id },
+        where: { className },
       });
       const deletedPassives = await tx.passive.deleteMany({
-        where: { classId: classRecord.id },
+        where: { className },
       });
       const deletedSkills = await tx.skill.deleteMany({
-        where: { classId: classRecord.id },
+        where: { className },
       });
 
       // Delete class record

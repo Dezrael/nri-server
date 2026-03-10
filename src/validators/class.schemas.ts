@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   classNameSchema,
+  emptyToUndefined,
   entityNameSchema,
   textBlockSchema,
 } from "./common.schemas";
@@ -8,14 +9,15 @@ import {
 const classSkillInputSchema = z.object({
   className: classNameSchema.optional(),
   name: entityNameSchema,
-  actionType: z.string().trim().min(1).max(120).optional().default("-"),
-  range: z.string().trim().min(1).max(120).optional().default("-"),
-  stat: z.string().trim().min(1).max(120).optional().default("-"),
-  duration: z.string().trim().min(1).max(240).optional().default("-"),
-  damage: z.string().trim().min(1).max(120).optional().default("-"),
-  inCombatCooldown: z.string().trim().min(1).max(120).optional().default("-"),
-  outCombatCooldown: z.string().trim().min(1).max(120).optional().default("-"),
-  outCombatCharges: z.string().trim().min(1).max(120).optional().default("-"),
+  actionType: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  range: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  stat: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  duration: emptyToUndefined(z.string().trim().min(1).max(240)).default("-"),
+  damage: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  outCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
+  category: emptyToUndefined(z.string().trim().min(1).max(120)).default("Основные"),
   shortDescription: z.string().trim().min(1).max(300),
   description: textBlockSchema,
   concentration: z.coerce.boolean().default(false),
