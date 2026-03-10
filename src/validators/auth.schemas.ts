@@ -22,6 +22,7 @@ const importedSkillSchema = z.object({
   outCombatCooldown: z.string(),
   outCombatCharges: z.string(),
   cooldownType: z.string().optional(),
+  savingThrow: z.string().optional(),
   category: z.string().optional().default("Основные"),
   shortDescription: z.string(),
   description: z.string(),

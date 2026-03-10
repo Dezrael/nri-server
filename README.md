@@ -119,6 +119,7 @@ Admin auth endpoints:
   - `isChosen` -> `false`
 - Optional on create without default:
   - `cooldownType` -> not set (`null` in DB)
+  - `savingThrow` -> not set (`null` in DB)
 
 ### Passives
 

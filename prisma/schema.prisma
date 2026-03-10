@@ -32,6 +32,7 @@ model Skill {
   outCombatCooldown String
   outCombatCharges  String
   cooldownType      String?
+  savingThrow       String?
   category          String   @default("Основные")
   shortDescription  String
   description       String

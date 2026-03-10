@@ -29,6 +29,7 @@ const classSkillInputSchema = z.object({
     "-",
   ),
   cooldownType: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
+  savingThrow: emptyToUndefined(z.string().trim().min(1).max(120)).optional(),
   category: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "Основные",
   ),

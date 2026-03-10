@@ -19,6 +19,7 @@ const fieldLabelMap: Record<string, string> = {
   outCombatCooldown: "Перезарядка вне боя",
   outCombatCharges: "Заряды вне боя",
   cooldownType: "Тип перезарядки",
+  savingThrow: "Спасбросок",
   category: "Категория",
   concentration: "Концентрация",
   isChosen: "Выбрано",
