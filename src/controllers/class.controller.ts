@@ -27,4 +27,54 @@ export const classController = {
     const data = await mushroomService.list(className);
     res.json({ data });
   },
+
+  async create(req: Request, res: Response) {
+    const payload = req.body as {
+      className: string;
+      skills?: Array<{
+        className?: string;
+        name: string;
+        actionType: string;
+        range: string;
+        stat: string;
+        duration: string;
+        damage: string;
+        inCombatCooldown: string;
+        outCombatCooldown: string;
+        outCombatCharges: string;
+        shortDescription: string;
+        description: string;
+        concentration: boolean;
+        isChosen: boolean;
+      }>;
+      passives?: Array<{
+        className?: string;
+        name: string;
+        text: string;
+      }>;
+      mushrooms?: Array<{
+        className?: string;
+        name: string;
+        baseEffect: string;
+        activationEffect: string;
+        summonEffect: string;
+        aspectEffect: string;
+      }>;
+    };
+
+    const data = await classService.create({
+      className: payload.className,
+      skills: payload.skills ?? [],
+      passives: payload.passives ?? [],
+      mushrooms: payload.mushrooms ?? [],
+    });
+
+    res.status(201).json({ data });
+  },
+
+  async remove(req: Request, res: Response) {
+    const className = String(req.params.className);
+    const data = await classService.remove(className);
+    res.json({ data });
+  },
 };

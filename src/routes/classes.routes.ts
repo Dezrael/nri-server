@@ -1,12 +1,26 @@
 import { Router } from "express";
 import { classController } from "../controllers/class.controller";
 import { asyncHandler } from "../middlewares/asyncHandler";
+import { requireAdmin } from "../middlewares/requireAdmin";
 import { validate } from "../middlewares/validate";
 import { classParamSchema } from "../validators/common.schemas";
+import { createClassSchema } from "../validators/class.schemas";
 
 export const classesRouter = Router();
 
 classesRouter.get("/", asyncHandler(classController.list));
+classesRouter.post(
+  "/",
+  requireAdmin,
+  validate(createClassSchema),
+  asyncHandler(classController.create),
+);
+classesRouter.delete(
+  "/:className",
+  requireAdmin,
+  validate(classParamSchema),
+  asyncHandler(classController.remove),
+);
 classesRouter.get(
   "/:className/skills",
   validate(classParamSchema),
