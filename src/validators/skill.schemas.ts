@@ -15,13 +15,13 @@ const createSkillBodySchema = z.object({
   duration: emptyToUndefined(z.string().trim().min(1).max(240)).default("-"),
   damage: emptyToUndefined(z.string().trim().min(1).max(120)).default("-"),
   inCombatCooldown: emptyToUndefined(z.string().trim().min(1).max(120)).default(
-    "0",
+    "-",
   ),
   outCombatCooldown: emptyToUndefined(
     z.string().trim().min(1).max(120),
   ).default("-"),
   outCombatCharges: emptyToUndefined(z.string().trim().min(1).max(120)).default(
-    "infinite",
+    "-",
   ),
   category: emptyToUndefined(z.string().trim().min(1).max(120)).default(
     "Основные",

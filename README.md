@@ -110,9 +110,9 @@ Admin auth endpoints:
   - `stat` -> `"-"`
   - `duration` -> `"-"`
   - `damage` -> `"-"`
-  - `inCombatCooldown` -> `"0"`
+  - `inCombatCooldown` -> `"-"`
   - `outCombatCooldown` -> `"-"`
-  - `outCombatCharges` -> `"infinite"`
+  - `outCombatCharges` -> `"-"`
   - `category` -> `"Основные"`
   - `concentration` -> `false`
   - `isChosen` -> `false`

@@ -13,15 +13,9 @@ const classSkillInputSchema = z.object({
   stat: z.string().trim().min(1).max(120).optional().default("-"),
   duration: z.string().trim().min(1).max(240).optional().default("-"),
   damage: z.string().trim().min(1).max(120).optional().default("-"),
-  inCombatCooldown: z.string().trim().min(1).max(120).optional().default("0"),
+  inCombatCooldown: z.string().trim().min(1).max(120).optional().default("-"),
   outCombatCooldown: z.string().trim().min(1).max(120).optional().default("-"),
-  outCombatCharges: z
-    .string()
-    .trim()
-    .min(1)
-    .max(120)
-    .optional()
-    .default("infinite"),
+  outCombatCharges: z.string().trim().min(1).max(120).optional().default("-"),
   shortDescription: z.string().trim().min(1).max(300),
   description: textBlockSchema,
   concentration: z.coerce.boolean().default(false),
