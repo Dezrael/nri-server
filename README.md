@@ -1,6 +1,6 @@
 # NRI Server (Express + TypeScript + Prisma)
 
-Backend for DnD skills app (React + TypeScript).
+Backend for DnD skills app (React + TypeScript), built in vibecoding style with GitHub Copilot.
 
 ## Why Prisma
 
