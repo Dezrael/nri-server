@@ -54,6 +54,7 @@ export const classController = {
         className?: string;
         name: string;
         text: string;
+        isChosen: boolean;
       }>;
       mushrooms?: Array<{
         className?: string;
@@ -62,6 +63,7 @@ export const classController = {
         activationEffect: string;
         summonEffect: string;
         aspectEffect: string;
+        isChosen: boolean;
       }>;
     };
 

@@ -9,6 +9,7 @@ const passiveBodyBase = z.object({
   className: classNameSchema,
   name: entityNameSchema,
   text: textBlockSchema,
+  isChosen: z.coerce.boolean().default(false),
 });
 
 export const createPassiveSchema = z.object({

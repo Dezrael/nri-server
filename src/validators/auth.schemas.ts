@@ -37,6 +37,7 @@ const importedPassiveSchema = z.object({
   className: z.string(),
   name: z.string(),
   text: z.string(),
+  isChosen: z.boolean().optional().default(false),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 });
@@ -49,6 +50,7 @@ const importedMushroomSchema = z.object({
   activationEffect: z.string(),
   summonEffect: z.string(),
   aspectEffect: z.string(),
+  isChosen: z.boolean().optional().default(false),
   createdAt: z.string().optional(),
   updatedAt: z.string().optional(),
 });

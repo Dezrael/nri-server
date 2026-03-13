@@ -12,6 +12,7 @@ const createMushroomBodySchema = z.object({
   activationEffect: z.string().trim().max(4000).optional().default(""),
   summonEffect: z.string().trim().max(4000).optional().default(""),
   aspectEffect: z.string().trim().max(4000).optional().default(""),
+  isChosen: z.coerce.boolean().default(false),
 });
 
 const updateMushroomBodySchema = z.object({
@@ -21,6 +22,7 @@ const updateMushroomBodySchema = z.object({
   activationEffect: z.string().trim().max(4000).optional(),
   summonEffect: z.string().trim().max(4000).optional(),
   aspectEffect: z.string().trim().max(4000).optional(),
+  isChosen: z.coerce.boolean().optional(),
 });
 
 export const createMushroomSchema = z.object({

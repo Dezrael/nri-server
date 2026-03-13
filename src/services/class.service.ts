@@ -33,6 +33,7 @@ export const classService = {
     passives: Array<{
       name: string;
       text: string;
+      isChosen: boolean;
     }>;
     mushrooms: Array<{
       name: string;
@@ -40,6 +41,7 @@ export const classService = {
       activationEffect: string;
       summonEffect: string;
       aspectEffect: string;
+      isChosen: boolean;
     }>;
   }) {
     const existingClass = await prisma.class.findUnique({

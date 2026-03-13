@@ -52,6 +52,7 @@ model Passive {
   className String
   name      String
   text      String
+  isChosen  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -69,6 +70,7 @@ model Mushroom {
   activationEffect String
   summonEffect     String
   aspectEffect     String
+  isChosen         Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 

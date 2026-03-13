@@ -124,11 +124,15 @@ Admin auth endpoints:
 ### Passives
 
 - Required on create: `className`, `name`, `text`
+- Optional on create with defaults:
+  - `isChosen` -> `false`
 
 ### Mushrooms
 
 - Required on create: `className`, `name`, `baseEffect`
 - Optional on create with defaults: `activationEffect`, `summonEffect`, `aspectEffect` -> `""`
+- Optional on create with defaults:
+  - `isChosen` -> `false`
 
 ## cURL Examples
 

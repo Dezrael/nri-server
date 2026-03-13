@@ -43,6 +43,7 @@ const classPassiveInputSchema = z.object({
   className: classNameSchema.optional(),
   name: entityNameSchema,
   text: textBlockSchema,
+  isChosen: z.coerce.boolean().default(false),
 });
 
 const classMushroomInputSchema = z.object({
@@ -52,6 +53,7 @@ const classMushroomInputSchema = z.object({
   activationEffect: z.string().trim().max(4000).optional().default(""),
   summonEffect: z.string().trim().max(4000).optional().default(""),
   aspectEffect: z.string().trim().max(4000).optional().default(""),
+  isChosen: z.coerce.boolean().default(false),
 });
 
 export const createClassSchema = z.object({

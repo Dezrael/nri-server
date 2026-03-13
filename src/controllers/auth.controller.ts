@@ -46,6 +46,7 @@ export const authController = {
             className: string;
             name: string;
             text: string;
+            isChosen: boolean;
           }>;
           mushrooms: Array<{
             className: string;
@@ -54,6 +55,7 @@ export const authController = {
             activationEffect: string;
             summonEffect: string;
             aspectEffect: string;
+            isChosen: boolean;
           }>;
         }
       >;
@@ -84,6 +86,7 @@ export const authController = {
       className: string;
       name: string;
       text: string;
+      isChosen: boolean;
     }> = [];
 
     const mushroomRows: Array<{
@@ -93,6 +96,7 @@ export const authController = {
       activationEffect: string;
       summonEffect: string;
       aspectEffect: string;
+      isChosen: boolean;
     }> = [];
 
     for (const [className, classData] of Object.entries(payload.data)) {
@@ -138,6 +142,7 @@ export const authController = {
           className,
           name: passive.name,
           text: passive.text,
+          isChosen: passive.isChosen,
         });
       }
 
@@ -156,6 +161,7 @@ export const authController = {
           activationEffect: mushroom.activationEffect,
           summonEffect: mushroom.summonEffect,
           aspectEffect: mushroom.aspectEffect,
+          isChosen: mushroom.isChosen,
         });
       }
     }
